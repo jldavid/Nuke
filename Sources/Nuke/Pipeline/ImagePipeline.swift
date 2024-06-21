@@ -418,3 +418,15 @@ public final class ImagePipeline: @unchecked Sendable {
         try await data(for: ImageRequest(url: url))
     }
 }
+
+extension ImagePipeline {
+    static func background(delay: Double = 0.0, background: (()->Void)? = nil, completion: (() -> Void)? = nil) {
+        let pipeline: ImagePipeline = ImagePipeline.shared
+        pipeline.queue.async {
+            background?()
+            if let completion = completion {
+                completion()
+            }
+        }
+    }
+}

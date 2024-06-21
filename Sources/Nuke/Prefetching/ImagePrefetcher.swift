@@ -102,9 +102,17 @@ public final class ImagePrefetcher: @unchecked Sendable {
     ///
     /// See also ``startPrefetching(with:)-1jef2`` that works with `URL`.
     public func startPrefetching(with requests: [ImageRequest]) {
+        ImagePipeline.background(background: {
+            print("Started Prefetching")
+            self._startPrefetching(with: requests)
+        }, completion: {
+            print("Finished Prefetching")
+        })
+        /*
         pipeline.queue.async {
             self._startPrefetching(with: requests)
         }
+        */
     }
 
     public func _startPrefetching(with requests: [ImageRequest]) {
