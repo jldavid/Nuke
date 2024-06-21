@@ -108,11 +108,6 @@ public final class ImagePrefetcher: @unchecked Sendable {
         }, completion: {
             print("Finished Prefetching")
         })
-        /*
-        pipeline.queue.async {
-            self._startPrefetching(with: requests)
-        }
-        */
     }
     
     public func startPrefetching(with requests: [ImageRequest], background: (()->Void)? = nil, completion: (() -> Void)? = nil) {
@@ -127,9 +122,6 @@ public final class ImagePrefetcher: @unchecked Sendable {
             }
         })
     }
-    
-    
-    // , background: (()->Void)? = nil, completion: (() -> Void)? = nil
 
     public func _startPrefetching(with requests: [ImageRequest]) {
         for request in requests {
