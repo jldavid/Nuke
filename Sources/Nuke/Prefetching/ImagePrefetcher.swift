@@ -117,11 +117,9 @@ public final class ImagePrefetcher: @unchecked Sendable {
     
     public func startPrefetching(with requests: [ImageRequest], background: (()->Void)? = nil, completion: (() -> Void)? = nil) {
         ImagePipeline.background(background: {
-            print("Started Prefetching")
             self._startPrefetching(with: requests)
             background?()
         }, completion: {
-            print("Finished Prefetching")
             if let completion = completion {
                 DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
                     completion()
